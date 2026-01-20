@@ -1,0 +1,10 @@
+{
+  "properties": {
+    "displayName": "logger-contoso-its",
+    "secret": true,
+    "keyVault": {
+      "identityClientId": "<apim-client-id>",
+      "secretIdentifier": "https://<kv-instance-name>.vault.azure.net/secrets/AppInsights-InstrumentationKey-ai-some-webb-app-01-func"
+    }
+  }
+}

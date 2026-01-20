@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "credentials": {
+      "instrumentationKey": "{{logger-contoso-its}}"
+    },
+    "isBuffered": true,
+    "loggerType": "applicationInsights",
+    "description": "Application Insights logger for Contoso ITS",
+    "resourceId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/microsoft.insights/components/ai-some-webb-app-01-func"
+  }
+}

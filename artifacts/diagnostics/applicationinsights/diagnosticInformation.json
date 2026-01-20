@@ -1,0 +1,35 @@
+{
+  "properties": {
+    "alwaysLog": "allErrors",
+    "backend": {
+      "response": {
+        "body": {
+          "bytes": 0
+        }
+      }
+    },
+    "frontend": {
+      "request": {
+        "body": {
+          "bytes": 0
+        },
+        "dataMasking": {
+          "queryParams": [
+            {
+              "mode": "Mask",
+              "value": "queryParamNameGoesHere"
+            }
+          ]
+        }
+      }
+    },
+    "httpCorrelationProtocol": "Legacy",
+    "logClientIp": true,
+    "loggerId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.ApiManagement/service/<apmi-instance-name>/loggers/contoso-its",
+    "sampling": {
+      "percentage": 100,
+      "samplingType": "fixed"
+    },
+    "verbosity": "verbose"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "displayName": "some-webb-app-01-func-key",
+    "keyVault": {
+      "identityClientId": "<apim-client-id>",
+      "secretIdentifier": "https://<kv-instance-name>.vault.azure.net/secrets/FunctionApp-Key-some-webb-app-01-func"
+    },
+    "secret": true,
+    "tags": []
+  }
+}

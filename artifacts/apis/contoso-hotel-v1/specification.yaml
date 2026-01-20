@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: Contoso Hotel Guest Services API
+  version: 1.0.0
+  description: >-
+    HTTP-triggered Azure Function that surfaces room availability for the Contoso Hotel
+    sample application.
+servers:
+  - url: https://{functionAppName}.azurewebsites.net/api
+    description: Production Azure Functions endpoint
+    variables:
+      functionAppName:
+        default: contosohotel
+paths:
+  /guest-services/availability:
+    get:
+      operationId: GetRoomAvailability
+      summary: Lists room availability windows.
+      description: Returns the current availability window for each room type the hotel exposes.
+      tags:
+        - Guest Services
+      responses:
+        '200':
+          description: Room availability returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelAvailability'
+              examples:
+                default:
+                  value:
+                    availability:
+                      - roomNumber: 11
+                        roomType: Deluxe
+                        startDate: '2025-06-06'
+                        endDate: '2025-06-22'
+        '500':
+          description: Unexpected error while retrieving availability.
+components:
+  schemas:
+    HotelAvailability:
+      type: object
+      properties:
+        availability:
+          type: array
+          description: Collection of availability windows for each room.
+          items:
+            $ref: '#/components/schemas/RoomAvailability'
+      required:
+        - availability
+    RoomAvailability:
+      type: object
+      properties:
+        roomNumber:
+          type: integer
+          format: int32
+          minimum: 1
+          description: Unique room number within the property.
+        roomType:
+          $ref: '#/components/schemas/RoomType'
+        startDate:
+          type: string
+          format: date
+          description: First date the room is available (inclusive).
+        endDate:
+          type: string
+          format: date
+          description: Last date the room is available (exclusive).
+      required:
+        - roomNumber
+        - roomType
+        - startDate
+        - endDate
+    RoomType:
+      type: string
+      description: Supported room categories.
+      enum:
+        - Standard
+        - Deluxe
+        - Suite

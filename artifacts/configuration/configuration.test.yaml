@@ -1,0 +1,68 @@
+apimServiceName: <apmi-instance-name>
+named values:
+  - name: contoso-hotel-function-key-v1
+    properties:
+      displayName: "some-web-app-01-func-key"
+      keyVault:
+        identityClientId: "<apim-client-id>"
+        secretIdentifier: "https://<kv-instance-name>.vault.azure.net/secrets/FunctionApp-Key-some-web-app-01-func"
+      secret: true
+  - name: logger-contoso-its
+    properties:
+      displayName: "logger-contoso-its"
+      keyVault:
+        identityClientId: "<apim-client-id>"
+        secretIdentifier: "https://<kv-instance-name>.vault.azure.net/secrets/AppInsights-InstrumentationKey-ai-some-web-app-01-func"
+      secret: true
+backends:
+  - name: contoso-hotel-functionapp-v1
+    properties:
+      url: "https://some-web-app-01-func.azurewebsites.net/api"
+      resourceId: "https://management.azure.com/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Web/sites/some-web-app-01-func"
+      credentials:
+        header:
+          "x-functions-key": [
+            "{{contoso-hotel-function-key-v1}}"
+          ]
+diagnostics:
+  - name: contoso-its
+    properties:
+      verbosity: verbose
+      alwaysLog: true
+      loggerId: "/loggers/contoso-its"
+      logClientIp: true
+      sampling:
+        percentage: 100
+        samplingType: fixed
+      httpCorrelationProtocol: W3C
+      frontend:
+        request:
+          headers:
+            - "Accept"
+            - "Accept-Encoding"
+            - "User-Agent"
+          body:
+            bytes: 512
+          dataMasking:
+            queryParams:
+            - mode: "Mask"
+              value: "queryParamNameGoesHere"
+loggers:
+  - name: contoso-its
+    properties:
+      description: "Logger override for Contoso IT Service Application Insights"
+      credentials:
+        instrumentationKey: "{{logger-contoso-its}}"
+      loggerType: "applicationInsights"
+      isBuffered: true
+      resourceId: "/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/microsoft.insights/components/ai-some-web-app-01-func"
+apis:
+  - name: contoso-hotel-v1
+    properties:
+      isCurrent: true
+      serviceUrl: "https://some-web-app-01-func.azurewebsites.net"
+      diagnostics:
+        - name: contoso-its
+          properties:
+            verbosity: Error
+            loggerId: "/loggers/contoso-its"

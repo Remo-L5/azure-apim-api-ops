@@ -1,0 +1,25 @@
+{
+  "properties": {
+    "apiRevision": "1",
+    "authenticationSettings": {},
+    "description": "A sample API with information related to Contoso Hotel chain.  The available resources  include *availability*, *gallery* and *events*.  A single write operation is available to provide  feedback on a session.\n\n**Contact Team**:\n\tname: API Platform & Intergation Services\n\temail: apiops@rllcontoso.com",
+    "displayName": "Contoso Hotel API",
+    "isCurrent": true,
+    "path": "/contoso/hotel/v1",
+    "protocols": [
+      "https",
+      "http"
+    ],
+    "serviceUrl": "https://some-webb-app-01-func.azurewebsites.net",
+    "subscriptionKeyParameterNames": {
+      "header": "Ocp-Apim-Subscription-Key",
+      "query": "subscription-key"
+    },
+    "subscriptionRequired": true,
+    "contact": {
+      "name": "API Platform & Intergation Services",
+      "email": "apiops@rllcontoso.com",
+      "url": "https://contoso.com/api-support"
+    }
+  }
+}

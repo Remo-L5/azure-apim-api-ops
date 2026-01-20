@@ -1,0 +1,8 @@
+{
+  "properties": {
+    "description": "some-webb-app-01-func function app backend",
+    "protocol": "http",
+    "resourceId": "https://management.azure.com/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.Web/sites/some-webb-app-01-func",
+    "url": "https://some-webb-app-01-func.azurewebsites.net/api"
+  }
+}
